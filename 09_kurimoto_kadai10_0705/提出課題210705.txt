@@ -1,0 +1,39 @@
+
+①login.php：ログイン画面
+・IDとPWをlogin_act.phpに飛ばす。
+※navigationに「新規登録」(user.index.php)のリンクを設置
+※PWはinput type="password"として、非表示に。
+
+②login_act.php：ログイン処理
+・login.phpより送信されたIDでSQL／SELECT処理
+・hash化されたPWがlogin.phpより送信されたPWと一致していれば、
+　SESSION変数を持たせて、kanri_flg & life_flgに応じた下記ブックマーク一覧のページににredirect。
+
+life_flg = 0 			⇒bm_list_view_free.php
+life_flg = 1　&	kanri_flg = 0	⇒bm_list_view_pay.php
+life_flg = 1　&	kanri_flg = 1	⇒bm_list_view.php
+
+③-1 bm_list_view_free.php：無料会員用のブックマーク一覧
+・[書籍名]、[書籍概要]を表示
+※navigationに下記のリンクを設置
+	「設定変更」(detail.php)
+	「ログアウト」(logout.php)
+
+③-2 bm_list_view_pay.php：有料会員／非管理者用のブックマーク一覧
+・[書籍名]、[レーティング]、[更新日時]、[書籍概要]、[書籍URL]を表示
+・[書籍URL]にはAMAZONの書籍紹介のURLをリンク
+※navigationに下記のリンクを設置
+	「グラフ表示」(bm_chart.php)
+	「設定変更」(detail.php)
+	「ログアウト」(logout.php)
+	
+③-3 bm_list_view.php：有料会員／管理者用のブックマーク一覧
+・[書籍名]、[レーティング]、[更新日時]、[書籍概要]、[書籍URL]、[更新]、[削除]を表示
+・[書籍URL]にはAMAZONの書籍紹介のURLをリンク
+・[更新](bm_update_view.php)、[削除](bm_delete.php)
+※navigationに下記のリンクを設置
+	「データ登録」(bm_insert_view.php)
+	「グラフ表示」(bm_chart.php)
+	「設定変更」(detail.php)
+	「ユーザー一覧表示」(user_view.php)
+	「ログアウト」(logout.php)
